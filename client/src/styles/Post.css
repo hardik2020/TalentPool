@@ -1,0 +1,10 @@
+.likebtn:focus{
+    outline: none ;
+    box-shadow: none;
+}
+.likebtn:hover{
+    background-color: rgb(213, 218, 218);
+}
+.viewprofile:hover{
+    cursor: pointer;
+}

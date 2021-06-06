@@ -1,0 +1,9 @@
+.err404{
+    font-size: 140px;
+}
+@media screen and (max-width:500px) {
+    
+    .err404{
+        font-size: 70px;
+    }
+}
