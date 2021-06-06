@@ -1,6 +1,7 @@
 // import newuser from "../../../server/upload/newuser.jpg"
 import {useState,useEffect} from 'react';
 import React from 'react';
+import {useHistory} from 'react-router-dom'
 import Post from './Post';
 import { toast } from 'react-toastify';
 import InfiniteScroll from 'react-infinite-scroll-component';
@@ -11,6 +12,7 @@ const UserProfile=(props)=>{
   const ref = React.useRef();
   const [previewSource,setpreviewSource] = useState()
   const [page, setpage] = useState(1)
+  const history = useHistory();
 
 
   const fetchMore = async() => {
@@ -62,11 +64,11 @@ const UserProfile=(props)=>{
         const data1 = await res.json();
         if(data1.status===400)
         {
-          toast.error("Image Upload error",{position:toast.POSITION.TOP_CENTER});
+          toast.error("Image Upload error",{autoClose:2000,position:toast.POSITION.TOP_CENTER});
         }
         else
         {
-          toast.success("Image Uploaded",{position:toast.POSITION.TOP_CENTER});
+          toast.success("Image Uploaded",{autoClose:2000,position:toast.POSITION.TOP_CENTER});
         }
       }catch(err)
       {
@@ -117,6 +119,10 @@ return(
               <tr><td>Age:</td><td>{data.age}</td></tr>
             </tbody>
           </table>
+          <br/><br/>
+          <button onClick={()=>{
+            history.push('/editprofile');
+          }} className="btn btn-block btn-primary">Edit Profile</button>
         </div>
         <div className="col-md-4 col-10 pt-4 mx-auto order-md-2 order-1 text-center">
           <img style={{width:"200px",height:"200px",borderRadius:"176px"}} src={previewSource} alt="userPic" className="img-fluid" />

@@ -38,12 +38,12 @@ export default function HireUser(props) {
             setdisabled(false);
             if(data.status===201)
             {
-                toast.success("Email sent to user successfully!!",{position:toast.POSITION.TOP_CENTER});
+                toast.success("Email sent to user successfully!!",{autoClose:2000,position:toast.POSITION.TOP_CENTER});
                 setcontent("");
                 setsubject("");
             }
             else{
-                toast.error("Some error occured. Please try again after sometime",{position:toast.POSITION.TOP_CENTER})
+                toast.error("Some error occured. Please try again after sometime",{autoClose:2000,position:toast.POSITION.TOP_CENTER})
             }
         })
 

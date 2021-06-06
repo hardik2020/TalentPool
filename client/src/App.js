@@ -11,6 +11,7 @@ import PostTalent from './components/PostTalent'
 import ForgotUser from './components/ForgotUser'
 import ViewTalent from './components/ViewTalent'
 import ForgotPass from './components/ForgotPass';
+import EditProfile from './components/EditProfile';
 import {BrowserRouter as Router,Route,Switch} from 'react-router-dom'
 
 function App() {
@@ -23,6 +24,7 @@ function App() {
           <Route exact path = "/profile" component = {Profile} />
           <Route exact path = "/profile/:username" component = {Profile} />
           <Route exact path = "/login" component = {SignIn} />
+          <Route exact path = "/editprofile" component = {EditProfile} />
           <Route exact path = "/logout" component = {SignOut} />
           <Route exact path = "/forgotuser" component = {ForgotUser} />
           <Route exact path = "/forgotpass" component = {ForgotPass} />

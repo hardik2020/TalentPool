@@ -38,11 +38,11 @@ const SignUp = () => {
             {
                 err=data.error;
             }
-            toast.error(err,{position:toast.POSITION.TOP_CENTER});
+            toast.error(err,{autoClose:2000,position:toast.POSITION.TOP_CENTER});
             console.log('Registration unsuccessful');
         } 
         else{
-            toast("Registration successful. Please check your email",{position:toast.POSITION.TOP_CENTER});
+            toast("Registration successful. Please check your email",{autoClose:2000,position:toast.POSITION.TOP_CENTER});
             console.log('Registration successful');
             history.push('/login');
         }

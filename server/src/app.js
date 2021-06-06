@@ -85,6 +85,33 @@ app.post("/handleVote",async(req,res)=>{
   }
 })
 
+app.post("/deletePost",async(req,res)=>{
+  try{
+    await Posts.deleteOne({_id:req.body.postId});
+    res.status(201).json({status:201});
+  }
+  catch(err)
+  {
+    console.log(err);
+    res.status(400).json({status:400});
+  }
+})
+
+app.post("/editprofile",async(req,res)=>{
+  try{
+    await Register.updateOne({email:req.body.email},{$set:{fname:req.body.firstName,lname:req.body.lastName,gender:req.body.gender,age:req.body.age}});
+    const data = await Register.findOne({email:req.body.email});  
+    console.log("here ",data);  
+    res.status(201).json({status:201,data:data});
+  }
+  catch(err)
+  {
+    console.log(err);
+    res.status(400).json({status:400});
+  }
+
+})
+
 app.post("/getProfile",async(req,res)=>{
   try{
     const username = req.body.username;

@@ -51,7 +51,7 @@ export default function ViewTalent(props) {
             console.log(data);
             if(!data||data.status===400)
             {
-                toast.error("Some error occured",{position:toast.POSITION.TOP_CENTER});
+                toast.error("Some error occured",{autoClose:2000,position:toast.POSITION.TOP_CENTER});
             }
             else
             {

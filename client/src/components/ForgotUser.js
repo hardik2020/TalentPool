@@ -30,7 +30,7 @@ export default function ForgotUser() {
             .then(data=>{
                 if(data&&data.status===201)
                 {
-                    toast.info("Please check your Email",{position:toast.POSITION.TOP_CENTER});
+                    toast.info("Please check your Email",{autoClose:2000,position:toast.POSITION.TOP_CENTER});
                     setuser(email);
                     setotp(data.code);
                     window.setTimeout(()=>{
@@ -39,7 +39,7 @@ export default function ForgotUser() {
                 }
                 else
                 {
-                    toast.error("Please Enter a valid email",{position:toast.POSITION.TOP_CENTER});
+                    toast.error("Please Enter a valid email",{autoClose:2000,position:toast.POSITION.TOP_CENTER});
                 }
             })
         }
@@ -54,7 +54,7 @@ export default function ForgotUser() {
             }
             else
             {
-                toast.error("Please Enter a valid OTP",{position:toast.POSITION.TOP_CENTER});
+                toast.error("Please Enter a valid OTP",{autoClose:2000,position:toast.POSITION.TOP_CENTER});
             }
         }
         

@@ -59,11 +59,11 @@ export default function SignIn() {
             {
                 let err='Login unsuccessful';
                 
-                toast.error(err,{position:toast.POSITION.TOP_CENTER});
+                toast.error(err,{autoClose:2000,position:toast.POSITION.TOP_CENTER});
                 console.log('Login unsuccessful');
             } 
             else{
-                toast.success("Login successful",{position:toast.POSITION.TOP_CENTER});
+                toast.success("Login successful",{autoClose:2000,position:toast.POSITION.TOP_CENTER});
                 window.sessionStorage.setItem("status","online")
                 console.log(data1.data);
                 window.sessionStorage.setItem("data",JSON.stringify(data1.data));
@@ -100,15 +100,15 @@ export default function SignIn() {
             {
                 err=data.error;
             }
-            toast.error(err,{position:toast.POSITION.TOP_CENTER});
+            toast.error(err,{autoClose:2000,position:toast.POSITION.TOP_CENTER});
             console.log('Login unsuccessful');
         } 
         else if(data.status===400&&data.error==="Please confirm your email first")
         {
-            toast.warn(data.error,{position:toast.POSITION.TOP_CENTER});
+            toast.warn(data.error,{autoClose:2000,position:toast.POSITION.TOP_CENTER});
         }
         else{
-            toast.success('Login successful',{position:toast.POSITION.TOP_CENTER});
+            toast.success('Login successful',{autoClose:2000,position:toast.POSITION.TOP_CENTER});
             window.sessionStorage.setItem("status","online")
             window.sessionStorage.setItem("data",JSON.stringify(data.data));
             console.log('Login successful');

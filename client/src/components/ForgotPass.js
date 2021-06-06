@@ -29,11 +29,11 @@ export default function ForgotPass(props) {
         }
         else if(props.location===undefined||props.location.email===""||props.location.email===undefined)
         {
-            toast.error("You came through invalid path");
+            toast.error("You came through invalid path",{autoClose:2000,position:toast.POSITION.TOP_CENTER});
         }
         else
         {
-            toast.error("Password does not match");
+            toast.error("Password does not match",{autoClose:2000,position:toast.POSITION.TOP_CENTER});
         }
     }
     

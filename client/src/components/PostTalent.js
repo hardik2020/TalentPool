@@ -75,7 +75,7 @@ export default function PostTalent(props) {
         
         if(!valid)
         {
-            toast.error("Attempted Wrong File Type Submission",{position:toast.POSITION.TOP_CENTER});
+            toast.error("Attempted Wrong File Type Submission",{autoClose:2000,position:toast.POSITION.TOP_CENTER});
             return false;
         }
 
