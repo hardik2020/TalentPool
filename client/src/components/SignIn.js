@@ -78,6 +78,7 @@ export default function SignIn() {
         }
     }
 
+
     const PostData = async (e) => {
         e.preventDefault();
         const {email,password} = user;
@@ -149,10 +150,11 @@ export default function SignIn() {
                     }}
                     className='btn btn-block btn-primary'
                     cookiePolicy={'single_host_origin'}
-                    />
+                    /><br/><br/>
+                    <div ><a  href="/forgotuser">Forgot Password?</a></div>
                     <div className="py-2">
                         <p><a className="a-primary" href="signup">Create an account</a></p>
-                        <p><a className="a-primary" href="/">Need help?</a></p>
+                        
                     </div>
                     </form>
                 </div>

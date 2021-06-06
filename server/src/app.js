@@ -190,7 +190,64 @@ app.post("/viewTalent",async(req,res)=>{
   }
 })
 
+app.post('/fpass',async(req,res)=>{
+  try{
+    const data = await Register.findOne({email:req.body.email});
+    if(data)
+    {
+      data.password=req.body.pass;
+      await data.save();
+    }
+    else
+    {
+      res.status(400).json({status:400})  
+    }
+  }
+  catch(err)
+  {
+    console.log(err);
+    res.status(400).json({status:400})
+  }
+})
 
+app.post("/fuser",async(req,res)=>{
+  try{
+    const data = await Register.findOne({email:req.body.email});
+    if(data)
+    {
+      const user = process.env.USER;
+      const pass = process.env.PASSWORD;
+      const transport = nodemailer.createTransport({
+        service: "Gmail",
+        auth: {
+          user: user,
+          pass: pass,
+        },
+      });
+      const characters = '0123456789';
+      let confirmationCode = '';
+      for (let i = 0; i < 6; i++) {
+        confirmationCode += characters[Math.floor(Math.random() * characters.length )];
+      }
+      transport.sendMail({
+        from: user,
+        to: req.body.email,
+        subject: "Change Password",
+        html: `<h3>Hello ${data.fname}</h3>
+            <p>Your One Time Password is ${confirmationCode} (valid for only 10 minutes)</p>
+            `,
+      }).catch(err => console.log(err));
+      res.status(201).json({status:201,code:confirmationCode});
+    }
+    else
+    res.status(400).json({status:400})
+  }
+  catch(err)
+  {
+    console.log(err);
+    res.status(400).json({status:400})
+  }
+})
 
 app.post("/hireUser",async(req,res)=>{
   try{

@@ -8,7 +8,9 @@ import Welcome from './components/Welcome'
 import HireUser from './components/HireUser'
 import ListTalent from './components/ListTalent'
 import PostTalent from './components/PostTalent'
+import ForgotUser from './components/ForgotUser'
 import ViewTalent from './components/ViewTalent'
+import ForgotPass from './components/ForgotPass';
 import {BrowserRouter as Router,Route,Switch} from 'react-router-dom'
 
 function App() {
@@ -22,6 +24,8 @@ function App() {
           <Route exact path = "/profile/:username" component = {Profile} />
           <Route exact path = "/login" component = {SignIn} />
           <Route exact path = "/logout" component = {SignOut} />
+          <Route exact path = "/forgotuser" component = {ForgotUser} />
+          <Route exact path = "/forgotpass" component = {ForgotPass} />
           <Route exact path = "/postTalent/:category" component = {PostTalent} />
           <Route exact path = "/hireUser/:username" component = {HireUser} />
           <Route exact path = "/viewTalent/:category" component = {ViewTalent} />
