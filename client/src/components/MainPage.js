@@ -1,5 +1,5 @@
 import React from 'react'
-import image1 from '../images/image1.png';
+import image1 from '../images/image1.jpg';
 
 export default function MainPage() {
   return (
@@ -13,7 +13,7 @@ export default function MainPage() {
             <p className="pt-4" style={{fontSize:"30px",color:"#6f42c1"}}>Millions of talented people maintain their profile, show their talent and get hired on TalentPool.</p>
           </div>
           <div className="col-md-6 col-8 mx-auto py-5  text-center">
-            <img src={image1} style={{width:"250px",height:"300px"}} alt="pic" className="img-fluid"></img>
+            <img src={image1} style={{width:"400px",height:"400px"}} alt="pic" className="img-fluid"></img>
           </div>
         </div>
       </div>
