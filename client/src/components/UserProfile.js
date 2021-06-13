@@ -21,9 +21,9 @@ const UserProfile=(props)=>{
 
   const [data, setdata] = useState()
   const [posts, setposts] = useState([])
-    console.log(props);
+    //console.log(props);
     useEffect(() => {
-        console.log("Inside use effect");
+        //console.log("Inside use effect");
         fetch('/getProfile',{
             method:'POST',
             headers:{
@@ -40,7 +40,7 @@ const UserProfile=(props)=>{
             if(data1&&data1.status===201)
             {
                 setdata(data1.data);
-                console.log(data1);
+                //console.log(data1);
                 setpreviewSource(data1.data.image);
                 data1.posts=posts.concat(data1.posts);
                 setposts(data1.posts);
@@ -52,10 +52,10 @@ const UserProfile=(props)=>{
 
 
     const uploadImage = async (base64EncodedImage) => {
-      console.log(base64EncodedImage);
+      //console.log(base64EncodedImage);
       try{
-        console.log("try");
-        console.log("Going to upload image for",data);
+        //console.log("try");
+        //console.log("Going to upload image for",data);
         const res = await fetch('/upload',{
           method:'POST',
           body:JSON.stringify({data:base64EncodedImage,user:data.email}),
@@ -84,6 +84,7 @@ const UserProfile=(props)=>{
           return;
         }
         uploadImage(previewSource);
+        ref.current.value = "";
 
     }
     const previewImage = (file) => {
@@ -95,16 +96,16 @@ const UserProfile=(props)=>{
     }
     const handleFileChange = (e) => {
       const file = e.target.files[0];
-      console.log(file);
+      //console.log(file);
       previewImage(file);
-      ref.current.value = "";
+      
     }
 return(
   <> 
   {
     data!==undefined&&
     <div className="container mx-auto">
-      {console.log("inside render",data)}
+      
       <p style={{fontSize: "40px"}} className="text-center text-primary pt-3">{data.fname}'s Profile</p>
       <hr className="w-50 mx-auto" />
       <div className="row mx-auto pb-3">
@@ -120,9 +121,12 @@ return(
             </tbody>
           </table>
           <br/><br/>
-          <button onClick={()=>{
-            history.push('/editprofile');
-          }} className="btn btn-block btn-primary">Edit Profile</button>
+          {
+            data.email === JSON.parse(window.sessionStorage.getItem("data")).email &&
+            <button onClick={()=>{
+              history.push('/editprofile');
+            }} className="btn btn-block btn-primary">Edit Profile</button>
+          }
         </div>
         <div className="col-md-4 col-10 pt-4 mx-auto order-md-2 order-1 text-center">
           <img style={{width:"200px",height:"200px",borderRadius:"176px"}} src={previewSource} alt="userPic" className="img-fluid" />
@@ -131,7 +135,7 @@ return(
             <div>
               <form method="POST" encType="multipart/form-data" onSubmit={handleSubmit}>
                   <label>Upload Image</label><br/>
-                  <input type="file" name="file" onChange={handleFileChange} ref={ref}/><br/><br/>
+                  <input type="file" name="file" onChange={handleFileChange} ref={ref} required/><br/><br/>
                   
                   <button type="submit" className="btn btn-block btn-primary">Upload/Edit Image</button>
               </form>
@@ -151,7 +155,7 @@ return(
       <p style={{fontSize: "40px"}} className="text-center text-primary pt-3 mt-5">Posts</p>
       <hr className="w-50 mx-auto" />
       <div className="row mx-auto pt-md-4">
-        {console.log("data",data)}
+        
         <div className="col-lg-5 col-md-7 col-12 mx-auto">
         <InfiniteScroll
                     dataLength={posts.length}

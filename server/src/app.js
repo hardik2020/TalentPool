@@ -66,13 +66,15 @@ app.post("/handleVote",async(req,res)=>{
     if(idx2==-1)
     {
       posts.votes = posts.votes.concat({id:userId,vote:vote});
+      posts.score += (vote)
     }
     else
     {
       posts.votes[idx2].vote = vote;
+      posts.score += (2*vote)
     }
     console.log(posts.score);
-    posts.score += vote
+    
     console.log(posts.score);
     
     await posts.save();
@@ -87,7 +89,20 @@ app.post("/handleVote",async(req,res)=>{
 
 app.post("/deletePost",async(req,res)=>{
   try{
+    const post = await Posts.findOne({_id:req.body.postId});
+    const public_id = post.public_id;
+    console.log(public_id);
     await Posts.deleteOne({_id:req.body.postId});
+    console.log("Here deltepost");
+    await cloudinary.uploader.destroy(public_id,async(err,result)=>{
+      if(err)
+      {
+        console.log(err);
+      }
+      else{
+        console.log("deleted from cloudinary");
+      }
+    });
     res.status(201).json({status:201});
   }
   catch(err)
@@ -340,7 +355,7 @@ app.post("/uploadTalent",async(req,res)=>{
     //const data = await Register.findOne({email:req.body.user});
     //console.log(data);
 
-    const post = new Posts({date:new Date(),user:req.body.user,caption:req.body.caption,type:req.body.type,url:uploadedResponse.url,category:req.body.category});
+    const post = new Posts({date:new Date(),user:req.body.user,caption:req.body.caption,type:req.body.type,url:uploadedResponse.url,category:req.body.category,public_id:uploadedResponse.public_id});
 
     // = data.posts.concat({date:new Date(),caption:req.body.caption,type:req.body.type,url:uploadedResponse.url,category:req.body.category});
     //console.log(data);
