@@ -32,19 +32,23 @@ export default function Post(props) {
         
     }
     const deletePost = async(postId) =>{
-        fetch('/deletePost',{
-            method:'POST',
-            body:JSON.stringify({postId:postId}),
-            headers:{'Content-type':'application/json'}
-        })
-        .then(res=>res.json())
-        .then(data=>{
-            if(data&&data.status===201)
-            {
-                setdeleted(true);
-            }
-            
-        })
+        var conf = window.confirm("Do you want to delete post?");
+        if(conf == true)
+        {
+            fetch('/deletePost',{
+                method:'POST',
+                body:JSON.stringify({postId:postId}),
+                headers:{'Content-type':'application/json'}
+            })
+            .then(res=>res.json())
+            .then(data=>{
+                if(data&&data.status===201)
+                {
+                    setdeleted(true);
+                }
+                
+            })
+        }
     }
 
     const handleLike = (postId,postUserId) =>{
@@ -91,11 +95,11 @@ export default function Post(props) {
         {
             deleted===false&&
             <div className="card my-3">
-                <div className="header p-2 viewprofile" onClick={viewProfile}>
-                    <img src={props.item.photo} alt="" style={{width:"50px",height:"50px",borderRadius:"50%"}} />
+                <div className="header p-2 viewprofile">
+                    <img src={props.item.photo} alt="" style={{width:"50px",height:"50px",borderRadius:"50%"}}  onClick={viewProfile}/>
                     
             
-                    <h4 style={{display:"inline",paddingBottom:"0px"}} className="pl-3">{props.item.name}</h4>
+                    <h4 style={{display:"inline",paddingBottom:"0px"}} className="pl-3" onClick={viewProfile}>{props.item.name}</h4>
                     {
                         props.item.postUserId===JSON.parse(window.sessionStorage.getItem("data"))._id&&
                         <i onClick={()=>deletePost(props.item._id)} style={{position:"absolute",right:"15px",top:"15px",color:"#bd9156",fontSize:"23px"}} className="fa fa-trash pl-3" aria-hidden="true"></i>
