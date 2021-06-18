@@ -502,7 +502,6 @@ app.post("/login",async (req,res)=>{
 
 app.get("/logout",authentication,async (req,res)=>{
   try {
-    res.clearCookie("jwt");
 
     // // logout from single device
     // console.log("logout successful....");
@@ -517,6 +516,7 @@ app.get("/logout",authentication,async (req,res)=>{
     if(req.data.deviceCount==0)
     {
       //req.data.token="";
+      res.clearCookie("jwt");
       await Register.updateOne({_id:req.data._id},{$set:{token:"",deviceCount:0}});
     }
     else
